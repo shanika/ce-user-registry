@@ -1,17 +1,15 @@
 package com.ce.userregistry.repository;
 
 import com.ce.userregistry.entity.User;
-import jakarta.inject.Singleton;
+import io.micronaut.context.annotation.Executable;
+import io.micronaut.data.annotation.Repository;
+import io.micronaut.data.repository.CrudRepository;
 
 import java.util.List;
 
-@Singleton
-public class UserRepository {
-    public void save(User user) {
 
-    }
-
-    public List<User> findByLastName(String lastName) {
-        return null;
-    }
+@Repository
+public interface UserRepository extends CrudRepository<User, Long> {
+    @Executable
+    List<User> find(String lastName);
 }

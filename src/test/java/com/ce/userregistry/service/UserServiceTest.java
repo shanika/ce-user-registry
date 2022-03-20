@@ -39,12 +39,12 @@ class UserServiceTest {
     void findUsersByLastName() {
         String lastName = "Something";
 
-        when(userRepository.findByLastName(lastName)).thenReturn(List.of(mock(User.class)));
+        when(userRepository.find(lastName)).thenReturn(List.of(mock(User.class)));
 
         List<User> users = userService.findUsersByLastName(lastName);
 
         assertNotNull(users);
         assertEquals(users.size(), 1);
-        verify(userRepository).findByLastName(lastName);
+        verify(userRepository).find(lastName);
     }
 }

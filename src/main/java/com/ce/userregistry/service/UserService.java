@@ -18,6 +18,6 @@ public class UserService {
     }
 
     public List<User> findUsersByLastName(String lastName) {
-        return userRepository.findByLastName(lastName);
+        return userRepository.find(lastName);
     }
 }
