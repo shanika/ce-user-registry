@@ -10,6 +10,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,15 +37,20 @@ class UserServiceTest {
     }
 
     @Test
-    void findUsersByLastName() {
-        String lastName = "Something";
+    void findUsersBySurname() {
+        String surname = "Something";
 
-        when(userRepository.find(lastName)).thenReturn(List.of(mock(User.class)));
+        when(userRepository.find(surname)).thenReturn(List.of(mock(User.class)));
 
-        List<User> users = userService.findUsersByLastName(lastName);
+        List<User> users = userService.findUsersBySurname(surname);
 
         assertNotNull(users);
         assertEquals(users.size(), 1);
-        verify(userRepository).find(lastName);
+        verify(userRepository).find(surname);
+    }
+
+    @Test
+    void throwsAnExceptionIfNullSurnameProvided() {
+        assertThrows(IllegalArgumentException.class, () -> userService.findUsersBySurname(null));
     }
 }

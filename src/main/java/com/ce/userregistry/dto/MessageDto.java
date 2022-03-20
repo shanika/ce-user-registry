@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 public class MessageDto {
+
     private final Integer code;
+
     private final String content;
 }

@@ -17,12 +17,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Size(min = 1, max = 100)
+    @Size(max = 100)
     private String firstName;
 
-    @Size(min = 1, max = 100)
-    private String lastName;
+    @Size(max = 100)
+    private String surname;
 
-    @Size(min = 1, max = 100)
+    @Size(max = 100)
     private String email;
 }

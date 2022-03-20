@@ -49,7 +49,7 @@ class UserControllerTest {
     void testICanCreateAValidUser() {
 
         UserDto user = new UserDto();
-        user.setLastName("lastName");
+        user.setSurname("surname");
 
         User userEntity = new User();
 
@@ -75,14 +75,14 @@ class UserControllerTest {
     }
 
     @Test
-    void testICanSearchUsersByLastName() {
+    void testICanSearchUsersBySurname() {
 
         List<User> users = List.of(mock(User.class));
-        when(userService.findUsersByLastName("Something")).thenReturn(users);
+        when(userService.findUsersBySurname("Something")).thenReturn(users);
         UserDto userDto = new UserDto();
         when(userMapper.toDtoList(users)).thenReturn(List.of(userDto));
 
-        HttpResponse<List<UserDto>> response = client.toBlocking().exchange(HttpRequest.GET("/users?lastName=Something")
+        HttpResponse<List<UserDto>> response = client.toBlocking().exchange(HttpRequest.GET("/users?surname=Something")
                 , Argument.listOf(UserDto.class));
 
         assertNotNull(response.getBody());
@@ -94,13 +94,13 @@ class UserControllerTest {
     }
 
     @Test
-    void testSearchByEmptyLastNameReturnsZeroResults() {
+    void testSearchByEmptySurnameReturnsZeroResults() {
 
         List<User> users = List.of();
-        when(userService.findUsersByLastName("")).thenReturn(users);
+        when(userService.findUsersBySurname("")).thenReturn(users);
         when(userMapper.toDtoList(users)).thenReturn(List.of());
 
-        HttpResponse<List<UserDto>> response = client.toBlocking().exchange(HttpRequest.GET("/users?lastName=")
+        HttpResponse<List<UserDto>> response = client.toBlocking().exchange(HttpRequest.GET("/users?surname=")
                 , Argument.listOf(UserDto.class));
 
         assertNotNull(response.getBody());
@@ -111,7 +111,7 @@ class UserControllerTest {
     }
 
     @Test
-    void testLastNameParameterIsMandatoryForSearch() {
+    void testSurnameParameterIsMandatoryForSearch() {
         HttpClientResponseException exception = assertThrows(HttpClientResponseException.class,
                 () -> client.toBlocking().exchange(HttpRequest.GET("/users"), Argument.listOf(UserDto.class)));
         assertEquals(HttpStatus.BAD_REQUEST, exception.getStatus());
